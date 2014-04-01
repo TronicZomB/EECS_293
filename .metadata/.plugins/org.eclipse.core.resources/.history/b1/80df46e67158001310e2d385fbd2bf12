@@ -1,0 +1,24 @@
+
+/**
+ * The Identity Filter is a filter that will simply output exactly what was input to it.
+ *
+ */
+public class IdentityFilter extends Filter {
+	
+	/**
+	 * Creates a new instance of an Identity Filter
+	 */
+	// Complexity = 0
+	public IdentityFilter() {
+		// Empty Constructor
+	}
+	
+	/**
+	 * Filters the input to the filter.
+	 * 
+	 * @return The input exactly as is.
+	 */
+	public Signal<Number> filter(Signal<Number> in) {
+		return in;
+	}
+}

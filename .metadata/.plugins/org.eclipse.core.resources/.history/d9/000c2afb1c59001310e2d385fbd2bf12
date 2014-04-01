@@ -1,0 +1,88 @@
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Vector;
+
+
+public class MinFilter extends Filter {
+	private Integer windowSize = INFINITE_WINDOW;
+	private List<Signal> inputs = new ArrayList<Signal>();
+	private Signal<Number> output;	
+	
+	/**
+	 * Creates a new instance of a Min Filter that will return the minimum input since 
+	 * the beginning of the inputs or the last reset.
+	 */
+	// Complexity = 0
+	public MinFilter() {
+		// Empty Constructor
+	}
+	
+	/**
+	 * Creates a new instance of a Min Filter that will return the minimum input from 
+	 * within the given window size (the n previous inputs). 
+	 * 
+	 * @param windowSize The number of previous inputs to check in for the minimum from. 
+	 * 					  If the input is negative, take the absolute value. Passing 
+	 * 				      zero acts the same as the no parameter constructor.
+	 */
+	// Complexity = 0
+	public MinFilter(Integer windowSize) {
+		this.windowSize = Math.abs(windowSize);
+	}
+	
+	public Signal<Number> filter(Signal<Number> in) {
+		inputs.add(0, in);
+		
+		if (INFINITE_WINDOW == windowSize) {
+			output = min();
+		}
+		else {
+			output = windowMin();
+		}
+		
+		return output;
+	}
+	
+	public void reset() {
+		inputs.clear();
+	}
+	
+	private Signal<Number> windowMin() {
+		Signal<Number> toReturn = null;
+		Double minMagnitude = Double.POSITIVE_INFINITY;
+		int nInputs = 0;
+		
+		if (inputs.size() < windowSize) {
+			nInputs = inputs.size();
+		}
+		else {
+			nInputs = windowSize;
+		}
+		
+		for (int i = 0; i < nInputs; i++) {
+			Signal<Number> s = inputs.get(i);
+			if (s.getMagnitude().doubleValue() < minMagnitude) {
+				toReturn = inputs.get(i);
+				minMagnitude = toReturn.getMagnitude().doubleValue();
+			}
+		}
+		
+		return toReturn;
+	}
+	
+	private Signal<Number> min() {
+		int inputSize = inputs.size();
+		Signal<Number> toReturn = null;
+		Double minMagnitude = Double.POSITIVE_INFINITY;
+		
+		for (int i = 0; i < inputSize; i++) {
+			Signal<?> s = inputs.get(i);
+			if (s.getMagnitude().doubleValue() < minMagnitude) {
+				toReturn = inputs.get(i);
+				minMagnitude = toReturn.getMagnitude().doubleValue();
+			}
+		}
+		
+		return toReturn;
+	}
+}

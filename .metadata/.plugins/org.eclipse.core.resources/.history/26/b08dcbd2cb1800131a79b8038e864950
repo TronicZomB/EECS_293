@@ -1,0 +1,12 @@
+
+public class main {
+	public static void main(String[] args) {
+		MazeCell cell = new MazeCell();
+		try {
+			cell.passages();
+		} catch (UninitializedObjectException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+}

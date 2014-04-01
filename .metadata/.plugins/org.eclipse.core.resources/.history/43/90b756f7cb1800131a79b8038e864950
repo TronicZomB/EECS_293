@@ -1,0 +1,66 @@
+import java.util.Map;
+import java.util.Set;
+
+
+public class MazeCell {
+	final static int MAX_VALUE = Integer.MAX_VALUE;
+	
+	boolean isValid;
+	
+	MazeCell() {
+		MazeCell cell;
+		this.isValid = false;
+	}
+	
+	boolean addPassages(Map<MazeCell, Integer> passages) {
+		if (this.isValid) {
+			return false;
+		}
+		else {
+			
+			
+			return true;
+		}
+	}
+	
+	boolean isValid() {
+		return this.isValid;
+	}
+	
+	public int hashCode() {
+		
+		return -1;
+	}
+	
+	Map<MazeCell, Integer> passages() throws UninitializedObjectException {
+		if (!isValid) {
+				throw new UninitializedObjectException();
+		}
+		else {
+			
+		}
+		return null;
+	}
+	
+	Integer passageTimeTo (MazeCell cell) throws UninitializedObjectException {
+		
+		
+		return -1;
+	}
+	
+	Set<MazeCell> connectedCells() throws UninitializedObjectException {
+		
+		
+		return null;
+	}
+	
+	boolean isDeadEnd() throws UninitializedObjectException {
+		
+		return true;
+	}
+	
+	public String toString() {
+
+		return "";
+	}
+}

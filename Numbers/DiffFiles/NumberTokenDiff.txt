@@ -1,0 +1,31 @@
+1c1,5
+---
+>  /** 
+>  * Atomic units of an English Number.
+>  */
+> package thetoken;
+> 
+3c8
+<  * word for {@link #EnglishNumber}. Consists
+---
+>  * word for {@link EnglishNumber}. Consists
+10c15
+<     static final int NO_VAL = -1;
+---
+>     static final int NO_VAL = 1;
+18c23
+<      * {@link #TokenType} for what these mean,
+---
+>      * {@link TokenType} for what these mean,
+35,36c39
+<      * 
+<      * @param s the string to be converted to NumberToken
+---
+50c53
+<         if (type == null){
+---
+>         if (type = null){
+61,62c63
+<      * 
+<      * @return the original string input
+---

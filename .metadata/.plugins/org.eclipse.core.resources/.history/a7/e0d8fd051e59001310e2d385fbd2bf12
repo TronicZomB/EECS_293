@@ -1,0 +1,120 @@
+import java.util.ArrayList;
+import java.util.List;
+
+
+public class MaxFilter extends Filter {	
+	private Integer windowSize = INFINITE_WINDOW;
+	private List<Signal> inputs = new ArrayList<Signal>();
+	private Signal<Number> output;	
+	
+	/**
+	 * Creates a new instance of a Max Filter that will return the max input since 
+	 * the beginning of the inputs or the last reset.
+	 */
+	// Complexity = 0
+	public MaxFilter() {
+		// Empty Constructor
+	}
+	
+	/**
+	 * Creates a new instance of a Max Filter that will return the max input from 
+	 * within the given window size (the n previous inputs). 
+	 * 
+	 * @param windowSize The number of previous inputs to check in for the max from. 
+	 * 					  If the input is negative, take the absolute value. Passing 
+	 * 				      zero acts the same as the no parameter constructor.
+	 */
+	// Complexity = 0
+	public MaxFilter(Integer windowSize) {
+		this.windowSize = Math.abs(windowSize);
+	}
+	
+	/**
+	 * Filters the input based upon the predetermined window size in order to 
+	 * output the max signal from the inputs.
+	 * 
+	 * @param in The input signal to filter.
+	 * 
+	 * @return The max signal from the set of inputs.
+	 */
+	// Complexity = 1
+	public Signal<Number> filter(Signal<Number> in) {
+		inputs.add(0, in);
+		
+		if (INFINITE_WINDOW == windowSize) {
+			output = max();
+		}
+		else {
+			output = windowMax();
+		}
+
+		return output;
+	}
+	
+	/**
+	 * Resets the filter by clearing all previous inputs from the list. 
+	 */
+	// Complexity = 0
+	public void reset() {
+		inputs.clear();
+	}
+	
+	/**
+	 * This will return the max input from the previous n inputs, where n is determined by the 
+	 * window size parameter that was passed to the constructor.
+	 * 
+	 * @return The max signal from the subset of inputs.
+	 */
+	// Complexity = 3
+	private Signal<Number> windowMax() {
+		// The max Signal to be returned to filter()
+		Signal<Number> toReturn = null;
+		// The magnitude of the current max Signal
+		Double maxMagnitude = Double.NEGATIVE_INFINITY;
+		// The size of the window to look back on
+		int nInputs = 0;
+		
+		// Adjust the window size if the list is smaller than the parameter windowSize
+		if (inputs.size() < windowSize) {
+			nInputs = inputs.size();
+		}
+		else {
+			nInputs = windowSize;
+		}
+		
+		for (int i = 0; i < nInputs; i++) {
+			Signal<Number> s = inputs.get(i);
+			Double signalMagnitude = s.getMagnitude().doubleValue();
+			if (signalMagnitude > maxMagnitude) {
+				toReturn = inputs.get(i);
+				maxMagnitude = signalMagnitude;
+			}
+		}
+		
+		return toReturn;
+	}
+	
+	/**
+	 * This method will return the max signal input since the beginning of this filter or 
+	 * since the last reset.
+	 * 
+	 * @return The max signal since the beginning or last reset.
+	 */
+	// Complexity = 2
+	private Signal<Number> max() {
+		int inputSize = inputs.size();
+		Signal<Number> toReturn = null;
+		Double maxMagnitude = Double.NEGATIVE_INFINITY;
+		
+		for (int i = 0; i < inputSize; i++) {
+			Signal<?> s = inputs.get(i);
+			Double signalMagnitude = s.getMagnitude().doubleValue();
+			if (signalMagnitude > maxMagnitude) {
+				toReturn = inputs.get(i);
+				maxMagnitude = signalMagnitude;
+			}
+		}
+		
+		return toReturn;
+	}
+}

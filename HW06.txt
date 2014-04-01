@@ -1,0 +1,33 @@
+initialize an integer variable, indexCount, to zero
+
+initialize an empty hash table that uses integers for the keys and values
+
+initialize an empty linked list that is the output
+
+while the input text is not at the end of the file
+
+	segment the input text
+
+	when a valid segment is found
+
+		if the segment's numerical value is a key within the hash table
+
+			get the value from the hash table using the key that is this segment's numerical value
+
+			subtract from indexCount the value that was retrieved and subtract an additional 1 since the indices are zero based. store the value of this subtraction in an integer variable, outputPosition.
+
+			add the outputPosition to the end of the output linked list
+
+			do not increment the indexCount
+
+			remove the old key/value pair and add the new key/value pair to the hash table
+
+		else if the segment's numerical value is not in the hash table
+
+			add the indexCount to the end of the linked list
+
+			increment the indexCount by 1
+
+			add the segment's numerical value and the indexCount as a key/value pair into the hash table
+
+to output the compression, loop through the size of the linked list and display both the output linked list and the segment's numerical values

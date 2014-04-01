@@ -1,0 +1,95 @@
+import java.util.ArrayList;
+import java.util.List;
+
+
+public class MaxFilter extends Filter {	
+	private Integer windowSize = INFINITE_WINDOW;
+	private List<Signal> inputs = new ArrayList<Signal>();
+	private Signal<Number> output;	
+	
+	/**
+	 * Creates a new instance of a Max Filter that will return the max input since 
+	 * the beginning of the inputs or the last reset.
+	 */
+	// Complexity = 0
+	public MaxFilter() {
+		// Empty Constructor
+	}
+	
+	/**
+	 * Creates a new instance of a Max Filter that will return the max input from 
+	 * within the given window size (the n previous inputs). 
+	 * 
+	 * @param windowSize The number of previous inputs to check in for the max from.
+	 */
+	// Complexity = 1
+	public MaxFilter(Integer windowSize) {
+		if (windowSize <= 0) {
+			throw new IndexOutOfBoundsException();
+		}
+		this.windowSize = windowSize;
+	}
+	
+	/**
+	 * Filters the input based upon the predetermined window size. 
+	 * 
+	 * @param in The input signal to filter.
+	 * 
+	 * @return The max signal from the set of inputs.
+	 */
+	public Signal<Number> filter(Signal<Number> in) {
+		inputs.add(0, in);
+		
+		if (INFINITE_WINDOW == windowSize) {
+			output = max();
+		}
+		else {
+			output = windowMax();
+		}
+
+		return output;
+	}
+	
+	public void reset() {
+		inputs.clear();
+	}
+	
+	private Signal<Number> windowMax() {
+		Signal<Number> toReturn = null;
+		Double maxMagnitude = Double.NEGATIVE_INFINITY;
+		int nInputs = 0;
+		
+		if (inputs.size() < windowSize) {
+			nInputs = inputs.size();
+		}
+		else {
+			nInputs = windowSize;
+		}
+		
+		for (int i = 0; i < nInputs; i++) {
+			Signal<Number> s = inputs.get(i);
+			if (s.getMagnitude().doubleValue() > maxMagnitude) {
+				toReturn = inputs.get(i);
+				maxMagnitude = toReturn.getMagnitude().doubleValue();
+			}
+		}
+		
+		return toReturn;
+	}
+	
+	private Signal<Number> max() {
+		int inputSize = inputs.size();
+		Signal<Number> toReturn = null;
+		Double maxMagnitude = Double.NEGATIVE_INFINITY;
+		
+		for (int i = 0; i < inputSize; i++) {
+			Signal<?> s = inputs.get(i);
+			if (s.getMagnitude().doubleValue() > maxMagnitude) {
+				toReturn = inputs.get(i);
+				maxMagnitude = toReturn.getMagnitude().doubleValue();
+			}
+		}
+		
+		return toReturn;
+	}
+}

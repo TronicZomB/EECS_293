@@ -1,0 +1,116 @@
+import java.util.ArrayList;
+import java.util.List;
+
+
+public class ScalarLinearFilter extends ScalarFilter {
+	private List<Signal> prevInputs = new ArrayList<Signal>();
+	private List<Signal> prevOutputs = new ArrayList<Signal>();
+	private List<Number> inCoefficients = new ArrayList<Number>();
+	private List<Number> outCoefficients = new ArrayList<Number>();
+	
+	private Signal<Number> output;
+	
+	private int N;
+	private int M;
+	
+	public ScalarLinearFilter(List<Number> inCoefficients, List<Number> outCoefficients) {
+		this.inCoefficients = inCoefficients;
+		this.outCoefficients = outCoefficients;
+		initializeInputOutputLists();
+	}
+	
+	private void initializeInputOutputLists() {
+		N = inCoefficients.size();
+		M = outCoefficients.size();
+		
+		for (int i = 0; i < N; i++) {
+			inputs.add(new Signal<Number>(0));
+		}
+		
+		for (int i = 0; i < M; i++) {
+			prevOutputs.add(new Signal<Number>(0));
+		}
+	}
+	
+	@Override
+	public Signal<Number> filter(Signal<Number> in) {
+		super.filter(in);
+		
+		inputs.add(0, in);
+		inputs.remove(N);
+		
+		Double inputSum = sumInputs();
+		Double outputSum = sumOutputs();
+		
+		output = new Signal<Number>(inputSum - outputSum);
+		prevOutputs.add(0, output);
+		prevOutputs.remove(M);
+		
+		return output;
+	}
+	
+	private Double sumInputs() {
+		Double toReturn = 0.0;
+		
+		for (int i = 0; i < N; i++) {
+			Signal<?> s = inputs.get(i);
+			toReturn += inCoefficients.get(i).doubleValue() * s.getMagnitude().doubleValue();
+		}
+		
+		return toReturn;
+	}
+	
+	private Double sumOutputs() {
+		Double toReturn = 0.0;
+		
+		for (int i = 0; i < M; i++) {
+			Signal<?> s = prevOutputs.get(i);
+			toReturn += outCoefficients.get(i).doubleValue() * s.getMagnitude().doubleValue();
+		}
+		
+		return toReturn;
+	}
+	
+	@Override
+	public void reset(Number r) {
+		inputs.clear();
+		prevOutputs.clear();
+		initializeInputOutputLists();
+		Double inCoefficientSum = sumInCoefficeints();
+		Double outCoefficientSum = sumOutCoefficients();
+		
+		Double resetValue = r.doubleValue() * inCoefficientSum;
+		resetValue = resetValue / (1 + outCoefficientSum);
+		
+		for (int i = 0; i < M; i++) {
+			prevOutputs.add(new Signal<Number>(resetValue));
+		}
+	}
+	
+	@Override
+	public void reset() {
+		inputs.clear();
+		prevOutputs.clear();
+		initializeInputOutputLists();
+	}
+	
+	private Double sumInCoefficeints() {
+		Double toReturn = 0.0;
+		
+		for (int i = 0; i < N; i++) {
+			toReturn += inCoefficients.get(i).doubleValue();
+		}
+		
+		return toReturn;
+	}
+	
+	private Double sumOutCoefficients() {
+		Double toReturn = 0.0;
+		
+		for (int i = 0; i < M; i++) {
+			toReturn += outCoefficients.get(i).doubleValue();
+		}
+		
+		return toReturn;
+	}
+}

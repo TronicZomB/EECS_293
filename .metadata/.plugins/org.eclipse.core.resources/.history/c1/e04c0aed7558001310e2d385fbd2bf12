@@ -1,0 +1,8 @@
+
+public abstract class Filter {
+	final static protected int INFINITE_WINDOW = -1;
+
+	public abstract Signal<Number> filter(Signal<Number> in);
+	
+	public void reset() { /* Do nothing */ }
+}

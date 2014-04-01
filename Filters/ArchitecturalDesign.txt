@@ -1,0 +1,9 @@
+Architectural Design
+
+I began by writing out all that I knew about each type of filter and figured out where they overlapped and where they did not. I drew out multiple tree structures to manipulate how I felt the design would best be implemented. I found a rough outline that I felt would work best and decided to begin programming some of the different types of filters. I realized that as I programmed the filters an overall pattern developed that allowed me to utilize inheritance using superclasses. 
+
+Since there are multiple similar filters with different parameters I thought it best to make use of these similarities through inheritance. This way all that was needed was to call the super's constructor using varied parameters. This way I did not need to rewrite the equations/methods to do very similar tasks with different values, I just passed the already working methods/equations new parameters based upon the type of filter.
+
+My psuedo-code consisted of drawing and redrawing the filters in a hierarchical structure in order to determine the best inheritance methods.
+
+I choose to handle errors within each class seperately since they were only midly related it did not seem appropriate to have an ErrorManager. Each class had its own specific constraints. 

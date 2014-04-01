@@ -1,0 +1,45 @@
+import java.util.Vector;
+
+public class Signal<T extends Number> {
+	private Vector<T> vector = new Vector<T>();
+	
+	public Signal(T t1) {
+		vector.add(t1);
+	}
+	
+	public Signal(T t1, T... tn) {
+		vector.add(t1);
+		
+		for (int i = 0; i < tn.length; i++) {
+			vector.add(tn[i]);
+		}
+	}
+	
+	public Number getMagnitude() {
+		if (isScalar()) {
+			return vector.get(0);
+		}
+		
+		Double toReturn = 0.0;
+		
+		for (Number n : vector) {
+			Double temp = n.doubleValue();
+			toReturn += (temp * temp);
+		}
+		toReturn = Math.sqrt(toReturn);
+
+		return (T) toReturn;
+	}
+	
+	public Vector<T> getVector() {
+		return this.vector;
+	}
+	
+	public boolean isScalar() {
+		return (vector.size() == 1);
+	}
+	
+	public String toString() {
+		return getMagnitude().toString();
+	}
+}

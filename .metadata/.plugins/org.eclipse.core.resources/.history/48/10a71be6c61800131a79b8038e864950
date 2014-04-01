@@ -1,0 +1,54 @@
+import java.util.Map;
+import java.util.Set;
+
+
+public class MazeCell {
+	
+	MazeCell() {
+		MazeCell cell;
+	}
+	
+	boolean addPassages(Map<MazeCell, Integer> passages) {
+		
+		
+		return false;
+	}
+	
+	boolean isValid() {
+		
+		return false;
+	}
+	
+	public int hashCode() {
+		
+		return -1;
+	}
+	
+	Map<MazeCell, Integer> passages() throws UninitializedObjectException {
+		
+		
+		return null;
+	}
+	
+	Integer passageTimeTo (MazeCell cell) throws UninitializedObjectException {
+		
+		
+		return -1;
+	}
+	
+	Set<MazeCell> connectedCells() throws UninitializedObjectException {
+		
+		
+		return null;
+	}
+	
+	boolean isDeadEnd() throws UninitializedObjectException {
+		
+		return true;
+	}
+	
+	public String toString() {
+
+		return "";
+	}
+}

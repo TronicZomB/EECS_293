@@ -1,0 +1,7 @@
+
+public class main {
+	public static void main(String[] args) {
+		MazeCell cell = new MazeCell();
+		cell.passages();
+	}
+}

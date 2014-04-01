@@ -1,0 +1,13 @@
+1c1
+---
+> package nopackage;
+40,41c40
+<      * @param output the output stream to write the numeric value to
+<      * @param error the print stream that errors are written to
+---
+60,63c58
+<         
+<         //Close the Scanner and ErrorManager to prevent Memory Leaks
+<         in.close();
+<         em.cleanup();
+---

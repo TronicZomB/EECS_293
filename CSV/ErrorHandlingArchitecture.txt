@@ -1,0 +1,10 @@
+Error Handling Architecture
+
+In my error handling I went for a medium between robustness and correctness. As the user enters data into the Standard.in each line is parsed in and created as a DatabaseRow. As each DatabaseRow is created it will check the line input against a regular expression to make sure it matches the expected input. If it does match then it is added to the list of DatabaseRows that will make up the table. If the input does not match the regular expresssion then an error is printed out to Standard.err using an ErrorManager. The line that is invalid will be thrown out and the user can continue to enter lines after the error until Standard.in is closed. This meets in the middle of robustness, the program does not shut down upon erroneous input, and correctness, it does however require specific input. The code is designed to not throw exceptions, favoring a more robust design in that regard that there should be a way of handling any situation.
+
+If the user does not enter any valid rows into the table then once Standard.in is closed an error will be displayed that the input list was empty. Calling toCSVTable() will return an empty list in this situation and not other action will be taken.
+
+I chose to go with a more global approach to error handling. I decided on the global approach since I have two different objects that are closely linked and associated and I felt that any errors that either produce should be handled similarly in an independent ErrorManager. I felt that it is better to have a null check and print a nicely worded, appropriate error handled by the ErrorManager that the user can understand as opposed to displaying a NullPointerException stack trace.
+
+I have designed the program to not propogate errors at all. I feel that it does not make sense to propogate errors in this design since any error can and should be handled immediately. This immediate action also leads to barricades that prevent the user from generating further errors. I incorporated two asserts that make sure after that the CSV formatting took place properly.
+

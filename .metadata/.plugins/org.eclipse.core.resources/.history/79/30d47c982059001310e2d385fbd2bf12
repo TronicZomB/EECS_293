@@ -1,0 +1,26 @@
+import java.util.ArrayList;
+import java.util.List;
+
+
+public class FilterCascade extends Filter {
+	private Signal<Number> output;
+	private List<Filter> filters = new ArrayList<Filter>();
+	
+	public FilterCascade(Filter f1, Filter f2, Filter... f) {
+		filters.add(f1);
+		filters.add(f2);
+		for (int i = 0; i < f.length; i++) {
+			filters.add(f[i]);
+		}
+	}
+	
+	public Signal<Number> filter(Signal<Number> in) {
+		Signal<Number> temp = in;
+		for (Filter f : filters) {
+			temp = f.filter(temp);
+		}
+		
+		output = temp;
+		return output;
+	}
+}

@@ -1,0 +1,29 @@
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+
+public class main {
+	
+	public static void main(String[] args) {
+		// Read space-formatted table from standard in
+		List<List<String>> rows = new ArrayList<List<String>>();
+		List<String> rowMembers = new ArrayList<String>();
+		Scanner in = new Scanner(System.in);
+		while (in.hasNext()){
+			String toAdd = in.next();
+			//if (toAdd.equals("\n")) {
+			//	rows.add(rowMembers);
+			//}
+			//else {
+				rowMembers.add(toAdd);
+			//}
+        }
+		
+		//for (List<String> l : rows) {
+			for (String s : rowMembers) {
+				System.out.println(s);
+			}
+		//}
+	}
+}

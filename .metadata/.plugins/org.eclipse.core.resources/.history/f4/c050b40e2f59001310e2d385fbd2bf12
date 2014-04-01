@@ -1,0 +1,119 @@
+import java.util.ArrayList;
+import java.util.List;
+
+
+public class AverageFilter extends ScalarFilter {
+	private Integer windowSize = INFINITE_WINDOW;
+	private List<Signal> inputs = new ArrayList<Signal>();
+	private Signal<Number> output;
+	
+	/**
+	 * Creates a new instance of an Average Filter that will take the average of the inputs 
+	 * since the beginning or last reset.
+	 */
+	// Complexity = 0
+	public AverageFilter() {
+		// Empty Constructor
+	}
+	
+	/**
+	 * Creates a new instance of an Average Filter that will take the average of the 
+	 * last n inputs, where n is determined by the parameter windowSize.
+	 * 
+	 * @param windowSize The number of previous inputs to take the average of.
+	 */
+	// Complexity = 0
+	public AverageFilter(Integer windowSize) {
+		this.windowSize = Math.abs(windowSize);
+	}
+	
+	/**
+	 * Take the input Signal and add it to the list of inputs and take the average of the inputs
+	 * based upon the window size.
+	 * 
+	 * @param in The input Signal to filter.
+	 * 
+	 * @return A Signal that is the average of the input Signals.
+	 */
+	// Complexity = 1
+	@Override
+	public Signal<Number> filter(Signal<Number> in) {
+		super.filter(in);
+		
+		inputs.add(0, in);
+		
+		if (INFINITE_WINDOW == windowSize) {
+			output = average();
+		}
+		else {
+			output = windowAverage();
+		}
+		
+		return output;
+	}
+	
+	/**
+	 * Resets the filter by clearing all previous inputs from the list. 
+	 */
+	// Complexity = 0
+	@Override
+	public void reset() {
+		inputs.clear();
+	}
+	
+	/**
+	 * This method will calculate the average magnitudes of the input Signals within 
+	 * a window range of previous inputs.
+	 * 
+	 * @return A Signal that is the average of the input Signals.
+	 */
+	// Complexity = 2
+	private Signal<Number> windowAverage() {
+		// The total of all Signal inputs' magnitudes
+		Double totalMagnitudes = 0.0;
+		Double averageMagnitude;
+		
+		int nInputs = 0;
+
+		// Adjust the window size if the list is smaller than the parameter windowSize
+		if (inputs.size() < windowSize) {
+			nInputs = inputs.size();
+		}
+		else {
+			nInputs = windowSize;
+		}
+		
+		for (int i = 0; i < nInputs; i++) {
+			Signal<?> s = inputs.get(i);
+			Number signalMagnitude = s.getMagnitude();
+			totalMagnitudes += signalMagnitude.doubleValue();
+		}
+		
+		averageMagnitude = totalMagnitudes / nInputs;
+		Signal<Number> returnSignal = new Signal<Number>(averageMagnitude);
+		return returnSignal;
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	// Complexity = 1
+	private Signal<Number> average() {
+		// The total of all Signal inputs' magnitudes
+		Double totalMagnitudes = 0.0;
+		int inputSize = inputs.size();
+		Double averageMagnitude;
+		
+		for (int i = 0; i < inputSize; i++) {
+			Signal<?> s = inputs.get(i);
+			Number signalMagnitude = s.getMagnitude();
+			Double magnitudeAsDouble = signalMagnitude.doubleValue();
+			totalMagnitudes += magnitudeAsDouble;
+		}
+		
+		averageMagnitude = totalMagnitudes / inputSize;
+		Signal<Number> returnSignal = new Signal<Number>(averageMagnitude);
+		return returnSignal;
+	}
+}

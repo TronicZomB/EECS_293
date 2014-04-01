@@ -1,0 +1,34 @@
+import java.util.List;
+
+
+public class MazeRoute {
+
+	MazeRoute() {
+		
+	}
+	
+	boolean addCells(List<MazeCell> route) throws UninitializedObjectException {
+		
+		return false;
+	}
+	
+	boolean isValid() {
+		
+		return false;
+	}
+	
+	List<MazeCell> getCells() throws UninitializedObjectException {
+		
+		return null;
+	}
+	
+	public String toString() throws UninitializedObjectException {
+		
+		return "";
+	}
+	
+	Integer travelTime() throws UninitializedObjectException {
+		
+		return -1;
+	}
+}

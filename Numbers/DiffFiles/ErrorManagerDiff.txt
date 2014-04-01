@@ -1,0 +1,25 @@
+1c1
+---
+> package numberpackage;
+29,31c30
+<     /** 
+<      * Creates the singleton 
+<      */
+---
+>     /** Creates the singleton */
+34,38c33
+<     /** 
+<      * Returns the ErrorManager (a singleton)
+<      * 
+<      * @return the ErrorMessage instance
+<      */
+---
+>     /** Returns the ErrorManager (a singleton) */
+91,95c86
+<     /** 
+<      * Returns the proper error code based on the number of errors
+<      * 
+<      * @return {@link #EXIT_OK} if there were no errors, {@link #EXIT_ERR} otherwise
+<      */
+---
+>     /** Separated for testing */

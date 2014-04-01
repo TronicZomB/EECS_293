@@ -1,0 +1,82 @@
+import java.util.Vector;
+
+/**
+ * The Signal class is used as an intermediary to the Filter classes so that the Filter 
+ * classes will be able to handle scalars and vectors similarly by handling Signals instead.
+ * A scalar is simply a vector that is one dimensional. 
+ * 
+ * @param <T> The type of Number that this Signal will hold.
+ */
+public class Signal<T extends Number> {
+	private Vector<T> vector = new Vector<T>();
+	
+	/**
+	 * This constructor is used to create a scalar Signal.
+	 * 
+	 * @param t1 The one dimensional number that will make up this scalar Signal.
+	 */
+	// Complexity = 0
+	public Signal(T t1) {
+		vector.add(t1);
+	}
+	
+	/**
+	 * This constructor takes in one or more numbers and creates a vector Signal out of the numbers.
+	 * 
+	 * @param t1 The first number in the vector
+	 * @param tn The second through n-th number in the vector
+	 */
+	// Complexity = 1
+	public Signal(T t1, T... tn) {
+		vector.add(t1);
+		
+		for (int i = 0; i < tn.length; i++) {
+			vector.add(tn[i]);
+		}
+	}
+	
+	/**
+	 * This constructor takes in a vector as a parameter and sets it as this Signal's vector
+	 * 
+	 * @param vector The vector to be set as this Signal's vector
+	 */
+	// Complexity = 0
+	public Signal(Vector<T> vector) {
+		this.vector = vector;
+	}
+	
+	/**
+	 * This method will return the scalar number that is this Signal. If this Signal is a vector 
+	 * this method will return the magnitude of the vector.
+	 * 
+	 * @return The scalar value or magnitude of this Signal.
+	 */
+	// Complexity = 2
+	public Number getMagnitude() {
+		if (isScalar()) {
+			return vector.get(0);
+		}
+		
+		Double toReturn = 0.0;
+		
+		for (Number n : vector) {
+			Double temp = n.doubleValue();
+			toReturn += (temp * temp);
+		}
+		toReturn = Math.sqrt(toReturn);
+
+		return toReturn;
+	}
+	
+	public Vector<T> getVector() {
+		return this.vector;
+	}
+	
+	public boolean isScalar() {
+		return (vector.size() == 1);
+	}
+	
+	public String toString() {
+		return getMagnitude().toString();
+	}
+}

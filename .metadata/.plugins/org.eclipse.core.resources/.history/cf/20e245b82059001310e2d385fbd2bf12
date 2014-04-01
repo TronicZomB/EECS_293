@@ -1,0 +1,35 @@
+import java.util.ArrayList;
+import java.util.List;
+
+
+public class FilterCascade extends Filter {
+	private Signal<Number> output;
+	private List<Filter> filters = new ArrayList<Filter>();
+	
+	/**
+	 * Creates a new instance of a filter cascade, multiple filters feeding into the next.
+	 * There is a minimum requirement of at least two filters to be in the cascade.
+	 * 
+	 * @param f1 The first filter in the cascade
+	 * @param f2 The second filter in series in the cascade
+	 * @param f The rest of the filters to be added to the cascade. 
+	 * 			This can be zero or more filters, accessed via lists.
+	 */
+	public FilterCascade(Filter f1, Filter f2, Filter... f) {
+		filters.add(f1);
+		filters.add(f2);
+		for (int i = 0; i < f.length; i++) {
+			filters.add(f[i]);
+		}
+	}
+	
+	public Signal<Number> filter(Signal<Number> in) {
+		Signal<Number> temp = in;
+		for (Filter f : filters) {
+			temp = f.filter(temp);
+		}
+		
+		output = temp;
+		return output;
+	}
+}

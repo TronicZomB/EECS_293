@@ -1,0 +1,2 @@
+The objective of this assignment is to segment a text into tokens. Each token is a string of length k or less. Additionally, blanks and punctuation. test, it.as
+The objective of this assignment is to segment a text into tokens. Each token is a string of length k or less. Additionally, blanks and punctuation characters (“,.!?”) must be included in a token of unit length. For "example, "the text "I came, I saw, "I left.” can be segmented by k=3

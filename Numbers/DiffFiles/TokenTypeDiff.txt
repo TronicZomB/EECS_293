@@ -1,0 +1,52 @@
+1c1,7
+---
+> /**
+>  * 
+>  * Different types of tokens an English Number
+>  * can be made up of.
+>  */
+> package tokens;
+> 
+2c10
+---
+> import java.util.Map.Entry;
+31c39
+<             values.put("eighty", 8);
+---
+>             values.put("eigty", 8);
+90,94c98
+<     /** 
+<      * Sets the pattern 
+<      * 
+<      * @param pattern the string pattern to set as this TokenType's pattern
+<      */
+---
+>     /** Sets the pattern */
+99,103c103
+<     /** 
+<      * Gets the pattern that matches this token 
+<      * 
+<      * @return the string pattern for this token
+<      */
+---
+>     /** Gets the pattern that matches this token */
+108,112c108
+<     /** 
+<      * Gets the value for this token based on its original String 
+<      * 
+<      * @return the integer value for this token, or -1 if no value was found
+<      */
+---
+>     /** Gets the value for this token based on its original String */
+115,116c111,114
+<         if (values.containsKey(s)){
+<             return values.get(s);
+---
+>         for (Entry<String, Integer> e : values.entrySet()){
+>             if (s.equals(e.getValue().toString())){
+>                 return e.getValue();
+>             }
+125,126c122
+<      * 
+<      * @return an empty HashMap by default
+---

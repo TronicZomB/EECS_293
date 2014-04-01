@@ -1,0 +1,21 @@
+breadcrumb.org.eclipse.jdt.ui.JavaPerspective=true
+command=/System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Home/bin/javadoc
+content_assist_lru_history=<?xml version\="1.0" encoding\="UTF-8" standalone\="no"?><history maxLHS\="100" maxRHS\="10"><lhs name\="java.lang.Exception"><rhs name\="UninitializedObjectException"/><rhs name\="java.io.IOException"/></lhs><lhs name\="java.lang.Throwable"><rhs name\="UninitializedObjectException"/><rhs name\="java.io.IOException"/></lhs><lhs name\="UninitializedObjectException"><rhs name\="UninitializedObjectException"/></lhs><lhs name\="MazeCell$Status$Code"><rhs name\="MazeCell$Status$Code"/></lhs><lhs name\="MazeCell$Status"><rhs name\="MazeCell$Status"/></lhs><lhs name\="java.awt.Paint"><rhs name\="java.awt.Color"/></lhs><lhs name\="java.awt.Transparency"><rhs name\="java.awt.Color"/></lhs><lhs name\="java.awt.Color"><rhs name\="java.awt.Color"/></lhs><lhs name\="java.io.IOException"><rhs name\="java.io.IOException"/></lhs><lhs name\="Segmentator$Test"><rhs name\="Segmentator$Test"/></lhs><lhs name\="Segmentator"><rhs name\="Segmentator"/></lhs><lhs name\="Filter"><rhs name\="MaxFilter"/><rhs name\="ScalarFilter"/><rhs name\="AverageFilter"/><rhs name\="PureGainFilter"/><rhs name\="IdentityFilter"/><rhs name\="ScalarLinearFilter"/><rhs name\="FilterCascade"/></lhs><lhs name\="FilterCascade"><rhs name\="FilterCascade"/></lhs><lhs name\="ScalarFilter"><rhs name\="PureGainFilter"/></lhs><lhs name\="Signal"><rhs name\="Signal"/></lhs><lhs name\="java.lang.Number"><rhs name\="java.lang.Double"/><rhs name\="java.lang.Integer"/></lhs></history>
+content_assist_number_of_computers=13
+content_assist_proposals_background=255,255,255
+content_assist_proposals_foreground=0,0,0
+eclipse.preferences.version=1
+fontPropagated=true
+org.eclipse.jdt.ui.editor.tab.width=
+org.eclipse.jdt.ui.formatterprofiles.version=12
+org.eclipse.jdt.ui.javadoclocations.migrated=true
+org.eclipse.jdt.ui.text.code_templates_migrated=true
+org.eclipse.jdt.ui.text.custom_code_templates=<?xml version\="1.0" encoding\="UTF-8" standalone\="no"?><templates/>
+org.eclipse.jdt.ui.text.custom_templates=<?xml version\="1.0" encoding\="UTF-8" standalone\="no"?><templates/>
+org.eclipse.jdt.ui.text.templates_migrated=true
+org.eclipse.jface.textfont=1|Monaco|11.0|0|COCOA|1|;
+proposalOrderMigrated=true
+spelling_locale_initialized=true
+tabWidthPropagated=true
+useAnnotationsPrefPage=true
+useQuickDiffPrefPage=true

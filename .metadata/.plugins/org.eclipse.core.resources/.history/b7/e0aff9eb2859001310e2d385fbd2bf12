@@ -1,0 +1,81 @@
+import java.util.ArrayList;
+import java.util.List;
+
+
+public class AverageFilter extends ScalarFilter {
+	private Integer windowSize = INFINITE_WINDOW;
+	private List<Signal> inputs = new ArrayList<Signal>();
+	private Signal<Number> output;
+	
+	/**
+	 * Creates a new instance of an Average Filter.
+	 */
+	public AverageFilter() {
+		// Empty Constructor
+	}
+	
+	public AverageFilter(Integer windowSize) {
+		if (windowSize <= 0) {
+			throw new IndexOutOfBoundsException();
+		}
+		this.windowSize = windowSize;
+	}
+	
+	@Override
+	public Signal<Number> filter(Signal<Number> in) {
+		super.filter(in);
+		
+		inputs.add(0, in);
+		
+		if (INFINITE_WINDOW == windowSize) {
+			output = average();
+		}
+		else {
+			output = windowAverage();
+		}
+		
+		return output;
+	}
+	
+	@Override
+	public void reset() {
+		inputs.clear();
+	}
+	
+	private Signal<Number> windowAverage() {
+		Double lastN_Inputs = 0.0;
+		Double toReturn;
+		int nInputs = 0;
+		
+		if (inputs.size() < windowSize) {
+			nInputs = inputs.size();
+		}
+		else {
+			nInputs = windowSize;
+		}
+		
+		for (int i = 0; i < nInputs; i++) {
+			Signal<?> s = inputs.get(i);
+			lastN_Inputs += s.getMagnitude().doubleValue();
+		}
+		
+		toReturn = lastN_Inputs / nInputs;
+		Signal<Number> returnSignal = new Signal<Number>(toReturn);
+		return returnSignal;
+	}
+	
+	private Signal<Number> average() {
+		Double lastN_Inputs = 0.0;
+		int inputSize = inputs.size();
+		Double toReturn;
+		
+		for (int i = 0; i < inputSize; i++) {
+			Signal<?> s = inputs.get(i);
+			lastN_Inputs += s.getMagnitude().doubleValue();
+		}
+		
+		toReturn = lastN_Inputs / inputSize;
+		Signal<Number> returnSignal = new Signal<Number>(toReturn);
+		return returnSignal;
+	}
+}

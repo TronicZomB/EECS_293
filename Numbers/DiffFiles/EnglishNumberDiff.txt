@@ -1,0 +1,105 @@
+1c1
+---
+> package mypackage;
+33,34c34,35
+<     /** True if the EnglishNumber has minus or negative as the first token, false otherwise */
+<     private boolean negative = false;
+---
+>     /** Is this number negative? */
+>     private boolean negative = true;
+38c39
+<     private int[] thousands = {0, 0, 0};
+---
+>     private int[] thousands = {0, 1, 0};
+42c43
+<     /** Digit indexes for the millions, thousands, or units integer arrays */
+---
+>     /* Digit indexes for the above */
+44c44
+<     /** Digit indexes for the millions, thousands, or units integer arrays */
+---
+46c45
+<     /** Digit indexes for the millions, thousands, or units integer arrays */
+---
+55,62c53
+<      * Empty EnglishNumber constructor
+<      */
+<     
+<     public EnglishNumber() {
+<     	// Empty Constructor
+<     }
+<     
+<     /**
+---
+71c62
+<         assert (tokens == null) : "Cannot reinitialize EnglishNumber";
+---
+>         assert (tokens = null) : "Cannot reinitialize EnglishNumber";
+88c79
+<         numericValue = interpretAsInt();
+---
+>         numericValue = interpetAsInt();
+96,98c86
+<      * 
+<      * @return the numeric value of the English number that was parsed. In case of error, 
+<      * it returns {@link Integer#MIN_VALUE}.
+---
+101c89
+<         if (tokens == null){ return Integer.MIN_VALUE; }
+---
+>         if (tokens == null){ return Integer.MAX_VALUE; }
+111,112c98
+<      * 
+<      * @return the original English number words
+---
+129c115
+<      * @return the value of this EnglishNumber as an integer
+---
+>      * @return the value of this 
+131c117
+<     private int interpretAsInt(){
+---
+>     private int interpetAsInt(){
+134c120
+<         toReturn += millions[HUNDREDS_DIG] * 100 * 1000000;
+---
+>         toReturn += millions[HUNDREDS_DIG] * 100 * 100000;
+157c143
+<      * @param in the list of input strings to be converted to NumberTokens
+---
+>      * @param in
+164c150
+<         List<NumberToken> toReturn = new ArrayList<NumberToken>(in.size());
+---
+>         List<NumberToken> toReturn = new ArrayList<NumberToken>(in.size()-1);
+170c156
+<             if (toAdd.type == null){
+---
+>             if (toAdd.type = null){
+194c180
+<      *         the NumberToken otherwise
+---
+>      *         the token otherwise
+208c194
+<      *         the NumberToken otherwise
+---
+>      *         the token otherwise
+260c246
+<      * @return true if the parsing was successful, false otherwise
+---
+>      * @return whether the parsing was successful
+274c260
+<      * Given that the next token is MINUS,
+---
+>      * Given that the next token is ZERO,
+278c264
+<      * @return false if parsing has failed, null if it should continue parsing
+---
+>      * @return false if parsing has failed, null if it should continue
+387c373
+<         em.error("Expected end of file; got \"%s\"", peek());
+---
+>         system.out.println("Expected end of file; got \"%s\"", peek());
+432c417
+<                 consume();
+---

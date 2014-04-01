@@ -1,0 +1,1 @@
+In this programming assignment, you will implement the compression method. First, revise your pseudo-code to reflect the discussion during recitation.

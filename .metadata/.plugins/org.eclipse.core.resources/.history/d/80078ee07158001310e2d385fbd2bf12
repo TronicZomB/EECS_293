@@ -1,0 +1,11 @@
+
+public class IdentityFilter extends Filter {
+	
+	public IdentityFilter() {
+		// Empty Constructor
+	}
+	
+	public Signal<Number> filter(Signal<Number> in) {
+		return in;
+	}
+}
